@@ -92,7 +92,7 @@
      <string>Preço:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="codigo">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -101,11 +101,16 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="descricao">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -114,11 +119,16 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="preco">
     <property name="geometry">
      <rect>
       <x>150</x>
@@ -127,11 +137,16 @@
       <height>31</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true">background-color: rgb(255, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton">
+   <widget class="QRadioButton" name="informatica">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -149,7 +164,7 @@
      <string>Informática</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QRadioButton" name="alimentos">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -167,7 +182,7 @@
      <string>Alimentos</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_3">
+   <widget class="QRadioButton" name="limpeza">
     <property name="geometry">
      <rect>
       <x>160</x>
@@ -203,7 +218,7 @@
      <string>Categoria:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="cadastrar">
     <property name="geometry">
      <rect>
       <x>240</x>
