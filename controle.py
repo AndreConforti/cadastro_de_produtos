@@ -1,4 +1,12 @@
 from PyQt5 import uic, QtWidgets
+import mysql.connector
+
+banco = mysql.connector.connect(
+    host = 'localhost',
+    user = 'root',
+    passwd = '',
+    database = 'cadastro_produtos'
+)
 
 def funcao_principal():
     linha1 = formulario.codigo.text()
@@ -7,18 +15,22 @@ def funcao_principal():
     
     if formulario.informatica.isChecked():
         categoria = 'Informática'
-        print('Categoria Informática selecionada')
     elif formulario.alimentos.isChecked():
         categoria = 'Alimentos'
-        print('Categoria Alimentos selecionada')
     else:
         categoria = 'Limpeza'
-        print('Categoria Limpeza selecionada')
     
     print('teste')
     print('Codigo', linha1)
     print('Descrição', linha2)
     print('Preço', linha3)
+
+    cursor = banco.cursor()
+    comando_SQL = 'INSERT INTO produtos (codigo, descricao, preco, categoria) VALUES (%s, %s, %s, %s)'
+    dados = (str(linha1), str(linha2), str(linha3), categoria)
+    cursor.execute(comando_SQL, dados)
+    banco.commit()
+
 
 
 
