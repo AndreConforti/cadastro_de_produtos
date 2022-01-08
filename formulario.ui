@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
+    <width>432</width>
     <height>536</height>
    </rect>
   </property>
@@ -237,6 +237,27 @@
     </property>
     <property name="text">
      <string>Cadastrar</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="consultar">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>450</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 255, 127);</string>
+    </property>
+    <property name="text">
+     <string>Consultar</string>
     </property>
    </widget>
   </widget>
