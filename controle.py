@@ -1,5 +1,6 @@
 from PyQt5 import uic, QtWidgets
 import mysql.connector
+from reportlab.pdfgen import canvas
 
 banco = mysql.connector.connect(
     host = 'localhost',
@@ -7,6 +8,35 @@ banco = mysql.connector.connect(
     passwd = '',
     database = 'cadastro_produtos'
 )
+
+def gerar_pdf():
+    cursor = banco.cursor()
+    comando_SQL = 'SELECT * FROM produtos'
+    cursor.execute(comando_SQL)
+    dados_lidos = cursor.fetchall()
+    y = 0
+    pdf = canvas.Canvas("cadastro_produtos.pdf")
+    pdf.setFont('Times-Bold', 20)
+    pdf.drawString(200, 800, 'Produtos cadastrados:')
+    pdf.setFont('Times-Bold', 15)
+
+    pdf.drawString(10, 750, 'ID')
+    pdf.drawString(110, 750, 'CÓDIGO')
+    pdf.drawString(210, 750, 'DESCRIÇÃO')
+    pdf.drawString(310, 750, 'PREÇO')
+    pdf.drawString(410, 750, 'CATEGORIA')
+
+    for i in range(0, len(dados_lidos)):
+        y += 50
+        pdf.drawString(10, 750 - y, str(dados_lidos[i][0]))
+        pdf.drawString(110, 750 - y, str(dados_lidos[i][1]))
+        pdf.drawString(210, 750 - y, str(dados_lidos[i][2]))
+        pdf.drawString(310, 750 - y, str(dados_lidos[i][3]))
+        pdf.drawString(410, 750 - y, str(dados_lidos[i][4]))
+
+    pdf.save()
+    print('PDF GERADO COM SUCESSO')
+
 
 def funcao_principal():
     linha1 = formulario.codigo.text()
@@ -42,8 +72,7 @@ def consulta_produtos():
     comando_SQL = 'SELECT * FROM produtos'
     cursor.execute(comando_SQL)
     dados_lidos = cursor.fetchall()
-    print(dados_lidos[1])
-
+  
     consulta.tabela.setRowCount(len(dados_lidos))
     consulta.tabela.setColumnCount(5)
     
@@ -52,11 +81,18 @@ def consulta_produtos():
             consulta.tabela.setItem(i, j, QtWidgets.QTableWidgetItem(str(dados_lidos[i][j])))
 
 
+def voltar_principal():
+    consulta.close()
+    formulario.show()
+
+
 app = QtWidgets.QApplication([])
 formulario = uic.loadUi('formulario.ui')
 consulta = uic.loadUi('consulta.ui')
 formulario.cadastrar.clicked.connect(funcao_principal)
 formulario.consultar.clicked.connect(consulta_produtos)
+consulta.btn_voltar.clicked.connect(voltar_principal)
+consulta.btn_exportar.clicked.connect(gerar_pdf)
 
 formulario.show()
 app.exec()

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1115</width>
-    <height>862</height>
+    <height>880</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -129,6 +129,55 @@
       <set>AlignJustify|AlignVCenter</set>
      </property>
     </column>
+   </widget>
+   <widget class="QPushButton" name="btn_exportar">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>800</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string>Exportar</string>
+    </property>
+    <property name="shortcut">
+     <string>E</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_voltar">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>800</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(85, 0, 127);
+color: rgb(255, 255, 127);</string>
+    </property>
+    <property name="text">
+     <string>Voltar</string>
+    </property>
+    <property name="shortcut">
+     <string>V</string>
+    </property>
    </widget>
   </widget>
  </widget>
