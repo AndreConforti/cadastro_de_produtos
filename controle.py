@@ -9,6 +9,23 @@ banco = mysql.connector.connect(
     database = 'cadastro_produtos'
 )
 
+
+def editar_produto():
+    consulta.close()
+    editar.show()
+
+
+
+def excluir_produto():
+    linha = consulta.tabela.currentRow() # Mostra o número da linha q está clicado
+    consulta.tabela.removeRow(linha)
+    cursor = banco.cursor()
+    cursor.execute('SELECT id FROM produtos')
+    dados_lidos = cursor.fetchall()
+    valor_id = dados_lidos[linha][0]
+    cursor.execute('DELETE FROM produtos WHERE id=' + str(valor_id))
+ 
+
 def gerar_pdf():
     cursor = banco.cursor()
     comando_SQL = 'SELECT * FROM produtos'
@@ -89,10 +106,13 @@ def voltar_principal():
 app = QtWidgets.QApplication([])
 formulario = uic.loadUi('formulario.ui')
 consulta = uic.loadUi('consulta.ui')
+editar = uic.loadUi('form_editar_produto.ui')
 formulario.cadastrar.clicked.connect(funcao_principal)
 formulario.consultar.clicked.connect(consulta_produtos)
 consulta.btn_voltar.clicked.connect(voltar_principal)
 consulta.btn_exportar.clicked.connect(gerar_pdf)
+consulta.btn_excluir.clicked.connect(excluir_produto)
+consulta.btn_editar.clicked.connect(editar_produto)
 
 formulario.show()
 app.exec()
