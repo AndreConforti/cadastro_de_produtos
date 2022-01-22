@@ -2,6 +2,8 @@ from PyQt5 import uic, QtWidgets
 import mysql.connector
 from reportlab.pdfgen import canvas
 
+numero_id = 0
+
 banco = mysql.connector.connect(
     host = 'localhost',
     user = 'root',
@@ -14,6 +16,37 @@ def editar_produto():
     consulta.close()
     editar.show()
 
+    global numero_id
+    linha = consulta.tabela.currentRow()
+
+    cursor = banco.cursor()
+    cursor.execute('SELECT id FROM produtos')
+    dados_lidos = cursor.fetchall()
+    valor_id = dados_lidos[linha][0]
+    numero_id = valor_id
+    cursor.execute('SELECT * FROM produtos WHERE id = '+ str(valor_id))
+    produto = cursor.fetchall()
+    editar.le_id.setText(str(produto[0][0]))
+    editar.le_codigo.setText(str(produto[0][1]))
+    editar.le_descricao.setText(str(produto[0][2]))
+    editar.le_preco.setText(str(produto[0][3]))
+    editar.le_categoria.setText(str(produto[0][4]))
+
+
+def salvar_produto_editado():
+    global numero_id # Pega o nº do ID do produto q foi armazenado na função editar_produto
+    codigo = editar.le_codigo.text()
+    descricao = editar.le_descricao.text()
+    preco = editar.le_preco.text()
+    categoria = editar.le_categoria.text()
+    
+    # Atualizar os dados no Banco de Dados
+    cursor = banco.cursor()
+    cursor.execute(f"UPDATE produtos SET codigo = '{codigo}', descricao = '{descricao}', preco = '{preco}', categoria = '{categoria}' WHERE id = {numero_id} ")
+
+    # Atualizar as janelas
+    editar.close()
+    consulta_produtos()
 
 
 def excluir_produto():
@@ -113,6 +146,7 @@ consulta.btn_voltar.clicked.connect(voltar_principal)
 consulta.btn_exportar.clicked.connect(gerar_pdf)
 consulta.btn_excluir.clicked.connect(excluir_produto)
 consulta.btn_editar.clicked.connect(editar_produto)
+editar.btn_salvar.clicked.connect(salvar_produto_editado)
 
 formulario.show()
 app.exec()
